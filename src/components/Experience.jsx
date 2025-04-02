@@ -20,6 +20,12 @@ const ExperienceCard = ({ experience, index }) => {
           <h3 className="text-xl font-bold text-black mb-2">
             {experience.title}
           </h3>
+          <div className="flex items-center gap-4 text-gray-600 mb-2">
+            <div className="flex items-center gap-2">
+              <FiBriefcase className="w-4 h-4" />
+              <span className="font-medium">{experience.company}</span>
+            </div>
+          </div>
           <div className="flex items-center gap-4 text-gray-600 mb-4">
             <div className="flex items-center gap-2">
               <FiCalendar className="w-4 h-4" />
