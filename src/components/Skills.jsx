@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FiCode, FiDatabase, FiServer, FiTool } from 'react-icons/fi';
+import SectionContainer from './SectionContainer';
 
 const SkillCard = ({ category, items, index }) => {
   return (
@@ -10,31 +11,34 @@ const SkillCard = ({ category, items, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
+      className="bg-black dark:bg-black rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-yellow-900 dark:border-yellow-900 relative group overflow-hidden"
     >
-      <div className="flex items-center gap-4 mb-6">
-        <div className="p-2 rounded-lg bg-yellow-50">
+      {/* Decorative elements */}
+      <div className="absolute -left-4 -top-4 w-24 h-24 bg-yellow-400/10 rounded-full group-hover:bg-yellow-400/20 transition-all duration-500"></div>
+      
+      <div className="flex items-center gap-4 mb-8 relative z-10">
+        <div className="p-3 bg-yellow-900/30 dark:bg-yellow-900/30 rounded-xl">
           {category.icon}
         </div>
-        <h3 className="text-xl font-bold text-black">
+        <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 dark:from-yellow-400 dark:to-yellow-600 bg-clip-text text-transparent">
           {category.title}
         </h3>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-6 relative z-10">
         {items.map((item) => (
-          <div key={item.name}>
+          <div key={item.name} className="group/skill">
             <div className="flex justify-between mb-2">
-              <span className="text-gray-700">{item.name}</span>
-              <span className="text-gray-600">{item.level}%</span>
+              <span className="text-yellow-100 dark:text-yellow-100 font-medium">{item.name}</span>
+              <span className="text-yellow-200 dark:text-yellow-200">{item.level}%</span>
             </div>
-            <div className="h-2 bg-yellow-50 rounded-full overflow-hidden">
+            <div className="h-2.5 bg-yellow-900/20 dark:bg-yellow-900/20 rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${item.level}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="h-full bg-yellow-500"
+                className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 group-hover/skill:from-yellow-500 group-hover/skill:to-yellow-700 transition-all duration-300"
               />
             </div>
           </div>
@@ -49,7 +53,7 @@ const Skills = () => {
     {
       category: {
         title: 'Programming Languages',
-        icon: <FiCode className="w-6 h-6 text-black" />,
+        icon: <FiCode className="w-6 h-6 text-yellow-400 dark:text-yellow-400" />,
       },
       items: [
         { name: 'Python', level: 80 },
@@ -61,7 +65,7 @@ const Skills = () => {
     {
       category: {
         title: 'MERN Stack',
-        icon: <FiServer className="w-6 h-6 text-black" />,
+        icon: <FiServer className="w-6 h-6 text-yellow-400 dark:text-yellow-400" />,
       },
       items: [
         { name: 'MongoDB', level: 50 },
@@ -73,7 +77,7 @@ const Skills = () => {
     {
       category: {
         title: 'Databases & Tools',
-        icon: <FiDatabase className="w-6 h-6 text-black" />,
+        icon: <FiDatabase className="w-6 h-6 text-yellow-400 dark:text-yellow-400" />,
       },
       items: [
         { name: 'MySQL', level: 55 },
@@ -85,7 +89,7 @@ const Skills = () => {
     {
       category: {
         title: 'Frameworks & Libraries',
-        icon: <FiTool className="w-6 h-6 text-black" />,
+        icon: <FiTool className="w-6 h-6 text-yellow-400 dark:text-yellow-400" />,
       },
       items: [
         { name: 'Flask/Django', level: 65 },
@@ -97,30 +101,23 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl font-bold text-black mb-4">
-            Skills & Expertise
-          </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills and proficiency levels.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skills.map((skill, index) => (
-            <SkillCard key={skill.category.title} category={skill.category} items={skill.items} index={index} />
-          ))}
-        </div>
+    <SectionContainer
+      id="skills"
+      title="Skills & Expertise"
+      subtitle="A comprehensive overview of my technical skills and proficiency levels."
+      className="bg-black dark:bg-black"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {skills.map((skill, index) => (
+          <SkillCard 
+            key={skill.category.title} 
+            category={skill.category} 
+            items={skill.items} 
+            index={index} 
+          />
+        ))}
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 

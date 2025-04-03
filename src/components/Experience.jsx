@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FiBriefcase, FiCalendar, FiMapPin } from 'react-icons/fi';
+import SectionContainer from './SectionContainer';
 
 const ExperienceCard = ({ experience, index }) => {
   return (
@@ -10,23 +11,26 @@ const ExperienceCard = ({ experience, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
+      className="bg-white dark:bg-black rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-yellow-100 dark:border-yellow-900 relative group overflow-hidden"
     >
-      <div className="flex items-start gap-4">
-        <div className="p-2 rounded-lg bg-yellow-50">
-          <FiBriefcase className="w-6 h-6 text-black" />
+      {/* Decorative elements */}
+      <div className="absolute -right-16 -bottom-16 w-48 h-48 bg-yellow-400/5 rounded-full group-hover:bg-yellow-400/10 transition-all duration-500"></div>
+      
+      <div className="flex items-start gap-4 relative z-10">
+        <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl">
+          <FiBriefcase className="w-6 h-6 text-black dark:text-white" />
         </div>
         <div className="flex-1">
-          <h3 className="text-xl font-bold text-black mb-2">
+          <h3 className="text-xl font-bold bg-gradient-to-r from-black to-yellow-500 dark:from-white dark:to-yellow-400 bg-clip-text text-transparent mb-2">
             {experience.title}
           </h3>
-          <div className="flex items-center gap-4 text-gray-600 mb-2">
+          <div className="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400 mb-2">
             <div className="flex items-center gap-2">
               <FiBriefcase className="w-4 h-4" />
               <span className="font-medium">{experience.company}</span>
             </div>
           </div>
-          <div className="flex items-center gap-4 text-gray-600 mb-4">
+          <div className="flex flex-wrap items-center gap-4 text-black dark:text-yellow-200 mb-4">
             <div className="flex items-center gap-2">
               <FiCalendar className="w-4 h-4" />
               <span>{experience.period}</span>
@@ -36,14 +40,14 @@ const ExperienceCard = ({ experience, index }) => {
               <span>{experience.location}</span>
             </div>
           </div>
-          <p className="text-gray-700 mb-4">
+          <p className="text-black dark:text-yellow-100 mb-6">
             {experience.description}
           </p>
           <div className="flex flex-wrap gap-2">
             {experience.technologies.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-sm rounded-full bg-yellow-50 text-black border border-yellow-200"
+                className="px-3 py-1 text-sm rounded-full bg-yellow-50 dark:bg-yellow-900/30 text-black dark:text-yellow-100 border border-yellow-300 dark:border-yellow-800/50 transition-colors"
               >
                 {tech}
               </span>
@@ -58,7 +62,7 @@ const ExperienceCard = ({ experience, index }) => {
 const Experience = () => {
   const experiences = [
     {
-      title: 'MERN Stack Developer',
+      title: 'MERN Stack Developer Trainee',
       company: 'Faircode infotech',
       period: 'April 2025 - Present',
       location: 'kochi,kerala',
@@ -76,30 +80,22 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl font-bold text-black mb-4">
-            Work Experience
-          </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            My professional journey .
-          </p>
-        </motion.div>
-
-        <div className="space-y-8">
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={experience.title} experience={experience} index={index} />
-          ))}
-        </div>
+    <SectionContainer
+      id="experience"
+      title="Work Experience"
+      subtitle="My professional journey in the world of technology and education."
+      className="bg-black dark:bg-black"
+    >
+      <div className="space-y-8">
+        {experiences.map((experience, index) => (
+          <ExperienceCard 
+            key={experience.title} 
+            experience={experience} 
+            index={index} 
+          />
+        ))}
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 
