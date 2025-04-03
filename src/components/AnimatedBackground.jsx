@@ -1,12 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
 
 const AnimatedBackground = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, resolvedTheme } = useTheme();
-  const isDark = mounted && (resolvedTheme === 'dark' || theme === 'dark');
 
   useEffect(() => {
     setMounted(true);
@@ -29,9 +26,9 @@ const AnimatedBackground = () => {
       <div className="absolute bottom-0 right-0 w-full h-[40vh] bg-gradient-to-t from-yellow-500/10 to-transparent"></div>
       
       {/* Subtle yellow animated elements */}
-      <div className="absolute top-40 -right-40 w-96 h-96 bg-yellow-400 dark:bg-yellow-500 rounded-full opacity-5 dark:opacity-10 blur-3xl animate-float"></div>
-      <div className="absolute -bottom-20 left-20 w-80 h-80 bg-yellow-300 dark:bg-yellow-400 rounded-full opacity-5 dark:opacity-10 blur-3xl animate-float animation-delay-2000"></div>
-      <div className="absolute top-1/3 left-1/4 w-60 h-60 bg-yellow-500 dark:bg-yellow-300 rounded-full opacity-5 dark:opacity-5 blur-3xl animate-float animation-delay-4000"></div>
+      <div className="absolute top-40 -right-40 w-96 h-96 bg-yellow-400 rounded-full opacity-5 blur-3xl animate-float"></div>
+      <div className="absolute -bottom-20 left-20 w-80 h-80 bg-yellow-300 rounded-full opacity-5 blur-3xl animate-float animation-delay-2000"></div>
+      <div className="absolute top-1/3 left-1/4 w-60 h-60 bg-yellow-500 rounded-full opacity-5 blur-3xl animate-float animation-delay-4000"></div>
       
       {/* Dotted pattern overlay */}
       <div className="absolute inset-0 bg-dots-yellow opacity-10 bg-[length:20px_20px] transition-opacity duration-500" />

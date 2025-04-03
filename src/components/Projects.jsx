@@ -12,11 +12,18 @@ const ProjectCard = ({ project, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-black dark:bg-black rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-yellow-900 dark:border-yellow-900"
+      className="group relative bg-black rounded-xl overflow-hidden transition-all duration-500 border-0"
+      style={{
+        backgroundImage: 'linear-gradient(to bottom right, rgba(45,45,45,0.3), rgba(10,10,10,0.5))',
+        boxShadow: '0 10px 30px -15px rgba(234, 179, 8, 0.2)',
+      }}
     >
-      <div className="relative h-64 overflow-hidden">
+      {/* Gradient border effect */}
+      <div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-br from-yellow-500/30 via-yellow-700/20 to-transparent -z-10"></div>
+      
+      <div className="relative h-64 overflow-hidden rounded-t-xl">
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
         
         <Image
           src={project.image}
@@ -34,7 +41,7 @@ const ProjectCard = ({ project, index }) => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="p-4 rounded-full bg-yellow-500/20 backdrop-blur-md hover:bg-yellow-500/40 transition-colors"
+              className="p-4 rounded-full bg-yellow-500/30 backdrop-blur-md hover:bg-yellow-500/50 transition-colors shadow-lg"
             >
               <FiGithub className="text-yellow-100 text-xl" />
             </motion.a>
@@ -44,7 +51,7 @@ const ProjectCard = ({ project, index }) => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="p-4 rounded-full bg-yellow-500/20 backdrop-blur-md hover:bg-yellow-500/40 transition-colors"
+              className="p-4 rounded-full bg-yellow-500/30 backdrop-blur-md hover:bg-yellow-500/50 transition-colors shadow-lg"
             >
               <FiExternalLink className="text-yellow-100 text-xl" />
             </motion.a>
@@ -52,18 +59,19 @@ const ProjectCard = ({ project, index }) => {
         </div>
       </div>
       
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-yellow-100 dark:text-yellow-100 mb-3 group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors">
+      <div className="p-6 bg-gradient-to-b from-black/80 to-black">
+        <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent mb-3">
           {project.title}
         </h3>
-        <p className="text-yellow-100 dark:text-yellow-100 mb-4 line-clamp-3">
+        <p className="text-yellow-100 mb-5 line-clamp-3">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-2">
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 text-sm rounded-full bg-yellow-900/30 dark:bg-yellow-900/30 text-yellow-100 dark:text-yellow-100 border border-yellow-800/50 dark:border-yellow-800/50 transition-colors"
+              className="px-3 py-1 text-xs rounded-full bg-yellow-900/20 text-yellow-300 backdrop-blur-sm transition-colors"
+              style={{boxShadow: 'inset 0 0 5px rgba(234, 179, 8, 0.2)'}}
             >
               {tech}
             </span>

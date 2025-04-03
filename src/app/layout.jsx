@@ -1,7 +1,5 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import ThemeWrapper from '@/components/ThemeWrapper'
 import AnimatedBackground from '@/components/AnimatedBackground'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,17 +16,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link rel="icon" href="/images/favicon.jpg" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-black dark:bg-black text-yellow-200 dark:text-yellow-100`}>
-        <ThemeProvider>
-          <ThemeWrapper>
-            <AnimatedBackground />
-            {children}
-          </ThemeWrapper>
-        </ThemeProvider>
+      <body className={`${inter.className} min-h-screen bg-black text-yellow-200`}>
+        <AnimatedBackground />
+        {children}
       </body>
     </html>
   )

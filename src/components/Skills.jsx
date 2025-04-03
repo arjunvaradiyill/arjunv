@@ -11,16 +11,24 @@ const SkillCard = ({ category, items, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-black dark:bg-black rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-yellow-900 dark:border-yellow-900 relative group overflow-hidden"
+      className="relative bg-black/60 backdrop-blur-sm rounded-xl p-8 transition-all duration-300 group overflow-hidden"
+      style={{
+        backgroundImage: 'linear-gradient(145deg, rgba(45,45,45,0.3), rgba(10,10,10,0.5))',
+        boxShadow: '0 10px 30px -15px rgba(234, 179, 8, 0.3)'
+      }}
     >
+      {/* Gradient border effect */}
+      <div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-br from-yellow-500/30 via-yellow-700/20 to-transparent -z-10"></div>
+      
       {/* Decorative elements */}
-      <div className="absolute -left-4 -top-4 w-24 h-24 bg-yellow-400/10 rounded-full group-hover:bg-yellow-400/20 transition-all duration-500"></div>
+      <div className="absolute -right-12 top-0 w-36 h-36 bg-yellow-500/5 rounded-full blur-xl"></div>
+      <div className="absolute -left-12 -bottom-12 w-36 h-36 bg-yellow-500/10 rounded-full blur-xl"></div>
       
       <div className="flex items-center gap-4 mb-8 relative z-10">
-        <div className="p-3 bg-yellow-900/30 dark:bg-yellow-900/30 rounded-xl">
+        <div className="p-3 bg-gradient-to-br from-yellow-500/20 to-yellow-700/20 rounded-lg shadow-inner">
           {category.icon}
         </div>
-        <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 dark:from-yellow-400 dark:to-yellow-600 bg-clip-text text-transparent">
+        <h3 className="text-xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
           {category.title}
         </h3>
       </div>
@@ -29,17 +37,23 @@ const SkillCard = ({ category, items, index }) => {
         {items.map((item) => (
           <div key={item.name} className="group/skill">
             <div className="flex justify-between mb-2">
-              <span className="text-yellow-100 dark:text-yellow-100 font-medium">{item.name}</span>
-              <span className="text-yellow-200 dark:text-yellow-200">{item.level}%</span>
+              <span className="text-yellow-100 font-medium">{item.name}</span>
+              <span className="text-yellow-300 text-sm bg-yellow-900/30 px-2 py-0.5 rounded-full">{item.level}%</span>
             </div>
-            <div className="h-2.5 bg-yellow-900/20 dark:bg-yellow-900/20 rounded-full overflow-hidden">
+            <div className="h-2 bg-black/50 rounded-full overflow-hidden backdrop-blur-sm shadow-inner">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${item.level}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 group-hover/skill:from-yellow-500 group-hover/skill:to-yellow-700 transition-all duration-300"
-              />
+                className="h-full relative"
+                style={{
+                  background: `linear-gradient(90deg, #EAB308 0%, #F59E0B ${100-item.level/2}%, #FBBF24 100%)`,
+                  boxShadow: '0 0 8px rgba(234, 179, 8, 0.5)'
+                }}
+              >
+                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(234,179,8,0.3)_0%,_transparent_70%)] opacity-50"></div>
+              </motion.div>
             </div>
           </div>
         ))}

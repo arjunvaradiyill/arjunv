@@ -157,11 +157,22 @@ const Contact = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-black dark:bg-black rounded-2xl p-8 shadow-xl border border-yellow-900 dark:border-yellow-900 relative overflow-hidden"
+          className="relative bg-black/60 backdrop-blur-sm rounded-xl p-8 transition-all duration-300 overflow-hidden"
+          style={{
+            backgroundImage: 'linear-gradient(145deg, rgba(45,45,45,0.3), rgba(10,10,10,0.5))',
+            boxShadow: '0 10px 30px -15px rgba(234, 179, 8, 0.3)'
+          }}
         >
+          {/* Gradient border effect */}
+          <div className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-br from-yellow-500/30 via-yellow-700/20 to-transparent -z-10"></div>
+          
+          {/* Background elements */}
+          <div className="absolute -right-12 top-0 w-36 h-36 bg-yellow-500/5 rounded-full blur-xl"></div>
+          <div className="absolute -left-12 -bottom-12 w-36 h-36 bg-yellow-500/10 rounded-full blur-xl"></div>
+          
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 relative z-10">
             <div>
-              <label htmlFor="from_name" className="block text-sm font-medium text-yellow-300 dark:text-yellow-300 mb-1">
+              <label htmlFor="from_name" className="block text-sm font-medium text-yellow-300 mb-1">
                 Your Name
               </label>
               <input
@@ -171,13 +182,14 @@ const Contact = () => {
                 value={formData.from_name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-black dark:bg-black border border-yellow-900 dark:border-yellow-900 focus:border-yellow-500 dark:focus:border-yellow-400 text-yellow-200 dark:text-yellow-200 rounded-lg focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-black/40 border border-yellow-700/50 focus:border-yellow-500 text-yellow-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all backdrop-blur-sm"
                 placeholder="John Doe"
+                style={{boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3)'}}
               />
             </div>
 
             <div>
-              <label htmlFor="from_email" className="block text-sm font-medium text-yellow-300 dark:text-yellow-300 mb-1">
+              <label htmlFor="from_email" className="block text-sm font-medium text-yellow-300 mb-1">
                 Your Email
               </label>
               <input
@@ -187,13 +199,14 @@ const Contact = () => {
                 value={formData.from_email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-black dark:bg-black border border-yellow-900 dark:border-yellow-900 focus:border-yellow-500 dark:focus:border-yellow-400 text-yellow-200 dark:text-yellow-200 rounded-lg focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-black/40 border border-yellow-700/50 focus:border-yellow-500 text-yellow-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all backdrop-blur-sm"
                 placeholder="john@example.com"
+                style={{boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3)'}}
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-yellow-300 dark:text-yellow-300 mb-1">
+              <label htmlFor="message" className="block text-sm font-medium text-yellow-300 mb-1">
                 Message
               </label>
               <textarea
@@ -203,8 +216,9 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-3 bg-black dark:bg-black border border-yellow-900 dark:border-yellow-900 focus:border-yellow-500 dark:focus:border-yellow-400 text-yellow-200 dark:text-yellow-200 rounded-lg focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-black/40 border border-yellow-700/50 focus:border-yellow-500 text-yellow-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all backdrop-blur-sm"
                 placeholder="How can I help you?"
+                style={{boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3)'}}
               />
             </div>
 
@@ -215,8 +229,11 @@ const Contact = () => {
               <motion.button
                 type="submit"
                 disabled={status === 'sending'}
-                className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-medium rounded-lg hover:from-yellow-500 hover:to-yellow-700 focus:outline-none transition-colors"
-                whileHover={{ scale: 1.05 }}
+                className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-medium rounded-lg hover:from-yellow-500 hover:to-yellow-700 focus:outline-none transition-all shadow-md hover:shadow-yellow-500/20"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(234, 179, 8, 0.4)"
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 {status === 'sending' ? 'Sending...' : 'Send Message'}
@@ -224,15 +241,23 @@ const Contact = () => {
             </div>
 
             {status === 'success' && (
-              <div className="mt-4 p-3 bg-black border border-yellow-500 text-yellow-400 rounded-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 p-4 bg-black/60 border border-yellow-500 text-yellow-400 rounded-lg backdrop-blur-sm"
+              >
                 Message sent successfully! I'll get back to you soon.
-              </div>
+              </motion.div>
             )}
 
             {status === 'error' && (
-              <div className="mt-4 p-3 bg-black border border-red-500 text-red-400 rounded-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 p-4 bg-black/60 border border-red-500 text-red-400 rounded-lg backdrop-blur-sm"
+              >
                 Failed to send message. Please try emailing me directly.
-              </div>
+              </motion.div>
             )}
           </form>
         </motion.div>
