@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiInstagram } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 import SectionContainer from './SectionContainer';
 
-// Initialize EmailJS with your public key
-emailjs.init("Q6v1YzpDR9rdQvDQV");
+// No need to initialize here - will be handled in the component
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -17,25 +16,50 @@ const Contact = () => {
     message: '',
   });
   const [status, setStatus] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  // Initialize EmailJS when the component mounts
+  useEffect(() => {
+    // This ensures EmailJS is only initialized once in the client
+    emailjs.init("Q6v1YzpDR9rdQvDQV");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
+    setErrorMessage('');
 
     try {
-      // Using sendForm method which is more reliable
-      await emailjs.sendForm(
+      // Direct use of emailjs.send with the template parameters
+      const result = await emailjs.send(
         'service_pq8kcsc', // Your EmailJS service ID
         'template_4s4uyrb', // Your EmailJS template ID
-        formRef.current,
+        {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          message: formData.message,
+          to_name: "Arjun V",
+          reply_to: formData.from_email
+        },
         'Q6v1YzpDR9rdQvDQV' // Your EmailJS public key
       );
       
+      console.log('Email sent successfully:', result.text);
       setStatus('success');
       setFormData({ from_name: '', from_email: '', message: '' });
     } catch (error) {
       console.error('Error sending email:', error);
       setStatus('error');
+      
+      // Create a more detailed error message
+      let errorMsg = 'Failed to send message. Please email me directly.';
+      if (error.text) {
+        errorMsg = `Error: ${error.text}`;
+      } else if (error.message) {
+        errorMsg = `Error: ${error.message}`;
+      }
+      
+      setErrorMessage(errorMsg);
     }
   };
 
@@ -222,9 +246,6 @@ const Contact = () => {
               />
             </div>
 
-            <input type="hidden" name="to_name" value="Arjun V" />
-            <input type="hidden" name="reply_to" value={formData.from_email} />
-
             <div className="text-right">
               <motion.button
                 type="submit"
@@ -256,7 +277,15 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 p-4 bg-black/60 border border-red-500 text-red-400 rounded-lg backdrop-blur-sm"
               >
-                Failed to send message. Please try emailing me directly.
+                {errorMessage}
+                <div className="mt-3">
+                  <a 
+                    href={`mailto:arjunvaradiyil203@gmail.com?subject=Contact from Portfolio&body=Name: ${formData.from_name}%0D%0AEmail: ${formData.from_email}%0D%0A%0D%0AMessage: ${formData.message}`} 
+                    className="inline-flex items-center px-4 py-2 bg-yellow-600/30 text-yellow-300 rounded-lg hover:bg-yellow-600/50 transition-colors"
+                  >
+                    <FiMail className="mr-2" /> Send via Email Instead
+                  </a>
+                </div>
               </motion.div>
             )}
           </form>
