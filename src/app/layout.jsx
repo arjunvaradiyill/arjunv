@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedBackground from '@/components/AnimatedBackground';
-import FloatingContactButton from '@/components/FloatingContactButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +27,6 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <Footer />
-        <FloatingContactButton />
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiMail, FiDownload, FiInstagram } from 'react-icons/fi';
 import Image from 'next/image';
+import { FaRobot } from 'react-icons/fa';
 
 const Hero = () => {
   return (
@@ -75,14 +76,13 @@ const Hero = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-black dark:bg-black border border-yellow-500 dark:border-yellow-500 shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 group"
+                  className="p-3 rounded-full bg-black dark:bg-black border border-yellow-500 dark:border-yellow-500 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div className="text-yellow-400 dark:text-yellow-400 group-hover:text-yellow-500 transition-colors">
+                  <div className="text-yellow-400 dark:text-yellow-400 hover:text-yellow-500 transition-colors">
                     {social.icon}
                   </div>
-                  <span className="hidden sm:inline-block text-sm font-medium text-yellow-200 dark:text-yellow-200 group-hover:text-yellow-500 transition-colors">{social.label}</span>
                 </motion.a>
               ))}
             </motion.div>

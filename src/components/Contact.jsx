@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiInstagram } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiInstagram, FiLinkedin, FiGithub } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import SectionContainer from './SectionContainer';
 
@@ -88,30 +88,30 @@ const Contact = () => {
                 <h3 className="text-lg font-semibold text-yellow-100 mb-2 group-hover:text-yellow-400 transition-colors">
                   Social Media
                 </h3>
-                <div className="flex flex-col gap-2">
+                <div className="flex gap-3 mt-2">
                   <a 
                     href="https://www.linkedin.com/in/arjunvaradiyill/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                    className="p-3 rounded-full bg-black border border-yellow-500 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-110"
                   >
-                    LinkedIn: @arjunvaradiyill
+                    <FiLinkedin className="w-5 h-5 text-yellow-400 hover:text-yellow-300" />
                   </a>
                   <a 
                     href="https://github.com/arjunvaradiyill" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                    className="p-3 rounded-full bg-black border border-yellow-500 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-110"
                   >
-                    GitHub: @arjunvaradiyill
+                    <FiGithub className="w-5 h-5 text-yellow-400 hover:text-yellow-300" />
                   </a>
                   <a 
                     href="https://www.instagram.com/_arjuo__/" 
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer" 
-                    className="text-yellow-200 hover:text-yellow-400 transition-colors"
+                    className="p-3 rounded-full bg-black border border-yellow-500 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center hover:scale-110"
                   >
-                    Instagram: @_arjuo__
+                    <FiInstagram className="w-5 h-5 text-yellow-400 hover:text-yellow-300" />
                   </a>
                 </div>
               </div>
