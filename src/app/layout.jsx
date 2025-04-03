@@ -1,18 +1,19 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
-import AnimatedBackground from '@/components/AnimatedBackground'
+import './globals.css';
+import { Inter } from 'next/font/google';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import FloatingContactButton from '@/components/FloatingContactButton';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Arjun Varadiyil | Portfolio',
-  description: 'Personal portfolio website showcasing my projects and skills',
-  icons: {
-    icon: '/images/favicon.jpg',
-    shortcut: '/images/favicon.jpg',
-    apple: '/images/favicon.jpg',
-  },
-}
+  title: 'Arjun V - Portfolio',
+  description: 'Fullstack Developer | MERN Stack | React | Next.js | JavaScript',
+  icon: '/images/favicon.jpg',
+  shortcut: '/images/favicon.jpg',
+  apple: '/images/favicon.jpg'
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -20,10 +21,15 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/images/favicon.jpg" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-black text-yellow-200`}>
+      <body className={`${inter.className} min-h-screen bg-black text-black dark:text-yellow-100`}>
         <AnimatedBackground />
-        {children}
+        <Navbar />
+        <main>
+          {children}
+        </main>
+        <Footer />
+        <FloatingContactButton />
       </body>
     </html>
-  )
+  );
 } 
