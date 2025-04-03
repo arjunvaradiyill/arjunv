@@ -30,7 +30,7 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      // Direct use of emailjs.send with the template parameters
+      // Using send method instead of sendForm to avoid 404 errors
       const result = await emailjs.send(
         'service_pq8kcsc', // Your EmailJS service ID
         'template_4s4uyrb', // Your EmailJS template ID
@@ -40,8 +40,7 @@ const Contact = () => {
           message: formData.message,
           to_name: "Arjun V",
           reply_to: formData.from_email
-        },
-        'Q6v1YzpDR9rdQvDQV' // Your EmailJS public key
+        }
       );
       
       console.log('Email sent successfully:', result.text);
@@ -52,7 +51,7 @@ const Contact = () => {
       setStatus('error');
       
       // Create a more detailed error message
-      let errorMsg = 'Failed to send message. Please email me directly.';
+      let errorMsg = 'Failed to send message. Please use WhatsApp or email me directly.';
       if (error.text) {
         errorMsg = `Error: ${error.text}`;
       } else if (error.message) {
@@ -106,12 +105,25 @@ const Contact = () => {
               <h3 className="text-lg font-semibold text-yellow-100 dark:text-yellow-100 mb-1 group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors">
                 Phone
               </h3>
-              <a 
-                href="tel:+919946642065" 
-                className="text-yellow-200 dark:text-yellow-200 hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
-              >
-                +91 9946642065
-              </a>
+              <div className="flex items-center gap-3">
+                <a 
+                  href="tel:+919946642065" 
+                  className="text-yellow-200 dark:text-yellow-200 hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+                >
+                  +91 9946642065
+                </a>
+                <a 
+                  href="https://wa.me/919946642065" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-2 py-1 bg-green-600/30 text-green-300 rounded-lg hover:bg-green-600/50 transition-colors text-sm"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  </svg>
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </div>
 
@@ -246,20 +258,42 @@ const Contact = () => {
               />
             </div>
 
-            <div className="text-right">
+            <div className="text-right flex flex-col md:flex-row justify-end items-center gap-4">
+              <motion.a
+                href={`https://wa.me/919946642065?text=Hi Arjun, I'm ${encodeURIComponent(formData.from_name)} (${encodeURIComponent(formData.from_email)}). ${encodeURIComponent(formData.message)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white font-medium rounded-lg hover:from-green-600 hover:to-green-800 focus:outline-none transition-all shadow-md hover:shadow-green-500/20 flex items-center justify-center"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.4)"
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M11.5 0C5.149 0 0 5.149 0 11.5c0 2.517.81 4.85 2.187 6.745L.756 22.77c-.124.414.235.773.65.65l4.517-1.428C7.815 23.19 10.148 24 12.666 24c6.35 0 11.5-5.149 11.5-11.5S17.85 0 11.5 0zm0 22C6.36 22 2.186 17.825 2.186 12.687c0-5.139 4.176-9.313 9.314-9.313 5.138 0 9.313 4.174 9.313 9.313 0 5.14-4.174 9.314-9.313 9.314z" fillRule="evenodd"/>
+                </svg>
+                Message on WhatsApp
+              </motion.a>
+              
               <motion.button
                 type="submit"
                 disabled={status === 'sending'}
-                className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-medium rounded-lg hover:from-yellow-500 hover:to-yellow-700 focus:outline-none transition-all shadow-md hover:shadow-yellow-500/20"
+                className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-medium rounded-lg hover:from-yellow-500 hover:to-yellow-700 focus:outline-none transition-all shadow-md hover:shadow-yellow-500/20"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 10px 25px -5px rgba(234, 179, 8, 0.4)"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                {status === 'sending' ? 'Sending...' : 'Send Email'}
               </motion.button>
             </div>
+            
+            <p className="text-yellow-400/70 text-sm text-center mt-4">
+              Choose WhatsApp for instant communication or email for detailed inquiries.
+            </p>
 
             {status === 'success' && (
               <motion.div
@@ -278,7 +312,18 @@ const Contact = () => {
                 className="mt-4 p-4 bg-black/60 border border-red-500 text-red-400 rounded-lg backdrop-blur-sm"
               >
                 {errorMessage}
-                <div className="mt-3">
+                <div className="mt-3 flex flex-col sm:flex-row gap-3">
+                  <a 
+                    href={`https://wa.me/919946642065?text=Hi Arjun, I'm ${encodeURIComponent(formData.from_name)} (${encodeURIComponent(formData.from_email)}). ${encodeURIComponent(formData.message)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-green-600/30 text-green-300 rounded-lg hover:bg-green-600/50 transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    </svg>
+                    Send via WhatsApp Instead
+                  </a>
                   <a 
                     href={`mailto:arjunvaradiyil203@gmail.com?subject=Contact from Portfolio&body=Name: ${formData.from_name}%0D%0AEmail: ${formData.from_email}%0D%0A%0D%0AMessage: ${formData.message}`} 
                     className="inline-flex items-center px-4 py-2 bg-yellow-600/30 text-yellow-300 rounded-lg hover:bg-yellow-600/50 transition-colors"
