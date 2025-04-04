@@ -105,7 +105,7 @@ const Hero = () => {
               {/* Glass card effect for image */}
               <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-black dark:bg-black border-2 border-yellow-500 dark:border-yellow-600 p-3">
                 <Image
-                  src="https://lh3.googleusercontent.com/a/ACg8ocJqxeALwXt_aknMiD7AZPcI2HhQuNAlrNpHHEiyZNjGZ0JpMi7CKA=s576-c-no"
+                  src="https://instagram.fcok15-1.fna.fbcdn.net/v/t51.29350-15/348291587_3453419971567607_5423204564761775210_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjc2OHg3Njguc2RyLmYyOTM1MC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fcok15-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2QGYXa1htm41oO8iqHDxcmVECl0RY45WFPanPoM-JODx1cxymX3YD0nX2Mh-TiOub0Y&_nc_ohc=WHKUC45G12IQ7kNvwEUnxSN&_nc_gid=hvyeFXrLTMOByguRy_1yKg&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=MzEwODM3NDA3NjMwNjczNzk1Nw%3D%3D.3-ccb7-5&oh=00_AYHEuhTo-THj-Qv2wvIYbR-kvIKBLVSiz44tFSXVamNUsw&oe=67F5202B&_nc_sid=10d13b"
                   alt="Arjun V"
                   width={320}
                   height={320}

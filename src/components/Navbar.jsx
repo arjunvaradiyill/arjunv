@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiHome, FiUser, FiCode, FiAward, FiBriefcase, FiMail } from 'react-icons/fi';
+import { FiMenu, FiX, FiHome, FiUser, FiCode, FiAward, FiBriefcase, FiMail, FiBook } from 'react-icons/fi';
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
@@ -33,6 +33,7 @@ export default function Navbar() {
   const navItems = [
     { name: 'Home', href: '#home', icon: <FiHome /> },
     { name: 'About', href: '#about', icon: <FiUser /> },
+    { name: 'Education', href: '#education', icon: <FiBook /> },
     { name: 'Projects', href: '#projects', icon: <FiCode /> },
     { name: 'Skills', href: '#skills', icon: <FiAward /> },
     { name: 'Experience', href: '#experience', icon: <FiBriefcase /> },
