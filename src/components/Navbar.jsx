@@ -81,6 +81,17 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
+            {/* Theme Toggle Button */}
+            <motion.button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Toggle theme"
+            >
+              {currentTheme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
+            </motion.button>
+            
             {/* Mobile Navigation Button */}
             <motion.button
               className="md:hidden p-2 rounded-lg bg-black/90 dark:bg-black/90 backdrop-blur-sm text-yellow-100 dark:text-yellow-100 hover:text-yellow-500 transition-colors"
@@ -116,6 +127,21 @@ export default function Navbar() {
                     {item.name}
                   </motion.a>
                 ))}
+                
+                {/* Theme Toggle in Mobile Menu */}
+                <div className="px-4 pt-2 pb-1 border-t border-yellow-900/20">
+                  <div className="flex items-center justify-between">
+                    <span className="text-yellow-300 text-sm">Theme</span>
+                    <motion.button
+                      onClick={toggleTheme}
+                      className="p-2 rounded-full bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      {currentTheme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
+                    </motion.button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}

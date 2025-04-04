@@ -188,7 +188,7 @@ const Experience = () => {
     {
       title: 'faculty in computer science',
       company: 'Xceed academy',
-      period: '2022 - 2023',
+      period: 'july 2024 - march 2025',
       location: 'perinthalmanna, Kerala',
       description: 'Developed lesson plans in programming, data structures, and algorithms while mentoring students for career success and integrating modern learning tools.',
       technologies: ['python', 'sql', 'computer networks', 'c,c++,java'],
@@ -202,7 +202,7 @@ const Experience = () => {
       period: '2020 - 2024',
       location: 'Kochi, Kerala',
       description: 'Completed Bachelor of Technology in Computer Science and Engineering with focus on software development, algorithms, and web technologies.',
-      technologies: ['Data Structures', 'Algorithms', 'Web Development', 'Database Systems'],
+      technologies: ['Data Structures', 'Algorithms', 'Computer Networks', 'Database Systems'],
     },
     {
       title: 'Plus Two Computer Science',
@@ -210,7 +210,7 @@ const Experience = () => {
       period: '2018 - 2020',
       location: 'Velliyanchery, Malappuram, Kerala',
       description: 'Completed higher secondary education with Computer Science specialization, building a foundation in programming and computer fundamentals.',
-      technologies: ['Computer Science', 'Mathematics', 'Physics', 'Basic Programming'],
+      technologies: ['Computer Science', 'Mathematics','chemistry', 'Physics', 'Basic Programming'],
     },
   ];
 
